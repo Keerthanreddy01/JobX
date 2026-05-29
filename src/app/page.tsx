@@ -133,7 +133,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 1: FEATURES */}
-      <section id="features" className="relative z-10 max-w-7xl mx-auto px-8 py-32 w-full border-t border-white/5 bg-black/10 backdrop-blur-[2px]">
+      <section id="features" className="relative z-10 max-w-7xl mx-auto px-8 py-32 w-full border-t border-white/5 bg-black/35 backdrop-blur-[6px]">
         <div className="flex flex-col md:flex-row justify-between items-start mb-20 gap-8">
           <h2 className="text-4xl sm:text-5xl md:text-6xl tracking-tight font-normal text-white max-w-lg leading-tight" style={{ fontFamily: "'Instrument Serif', serif" }}>
             Crafted for <em className="not-italic text-[hsl(var(--muted-foreground))]">the quiet achiever.</em>
@@ -192,7 +192,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 2: STUDIO */}
-      <section id="studio" className="relative z-10 max-w-7xl mx-auto px-8 py-32 w-full border-t border-white/5 bg-black/5">
+      <section id="studio" className="relative z-10 max-w-7xl mx-auto px-8 py-32 w-full border-t border-white/5 bg-black/25 backdrop-blur-[4px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <span className="text-xs uppercase tracking-widest text-[hsl(var(--muted-foreground))] font-medium">Workflow Engine</span>
@@ -202,24 +202,24 @@ export default function HomePage() {
             </h2>
             <div className="space-y-6">
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs text-white shrink-0">1</div>
+                <div className="w-8 h-8 rounded-full bg-white/15 border border-white/25 flex items-center justify-center text-xs text-white shrink-0 font-semibold">1</div>
                 <div>
-                  <h4 className="text-white font-medium text-base">Paste Description</h4>
-                  <p className="text-[hsl(var(--muted-foreground))] text-sm mt-1 leading-relaxed">Simply drop the raw Job Description text. No manual parser configurations required.</p>
+                  <h4 className="text-white font-semibold text-base">Paste Description</h4>
+                  <p className="text-[hsl(var(--muted-foreground))] text-sm mt-1 leading-relaxed font-normal">Simply drop the raw Job Description text. No manual parser configurations required.</p>
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs text-white shrink-0">2</div>
+                <div className="w-8 h-8 rounded-full bg-white/15 border border-white/25 flex items-center justify-center text-xs text-white shrink-0 font-semibold">2</div>
                 <div>
-                  <h4 className="text-white font-medium text-base">AI Analysis</h4>
-                  <p className="text-[hsl(var(--muted-foreground))] text-sm mt-1 leading-relaxed">Our unified NVIDIA NIM API reads skills, salaries, roles, and locations automatically.</p>
+                  <h4 className="text-white font-semibold text-base">AI Analysis</h4>
+                  <p className="text-[hsl(var(--muted-foreground))] text-sm mt-1 leading-relaxed font-normal">Our unified NVIDIA NIM API reads skills, salaries, roles, and locations automatically.</p>
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-xs text-white shrink-0">3</div>
+                <div className="w-8 h-8 rounded-full bg-white/15 border border-white/25 flex items-center justify-center text-xs text-white shrink-0 font-semibold">3</div>
                 <div>
-                  <h4 className="text-white font-medium text-base">Perfect Submissions</h4>
-                  <p className="text-[hsl(var(--muted-foreground))] text-sm mt-1 leading-relaxed">Copy the customized cover letter drafts instantly, submit your resume, and win the offer.</p>
+                  <h4 className="text-white font-semibold text-base">Perfect Submissions</h4>
+                  <p className="text-[hsl(var(--muted-foreground))] text-sm mt-1 leading-relaxed font-normal">Copy the customized cover letter drafts instantly, submit your resume, and win the offer.</p>
                 </div>
               </div>
             </div>
@@ -270,7 +270,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 3: JOURNAL & REACH US */}
-      <section id="journal" className="relative z-10 max-w-7xl mx-auto px-8 py-32 w-full border-t border-white/5 bg-black/10 backdrop-blur-[2px]">
+      <section id="journal" className="relative z-10 max-w-7xl mx-auto px-8 py-32 w-full border-t border-white/5 bg-black/35 backdrop-blur-[6px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Journal Entries */}
           <div>
