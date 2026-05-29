@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JobX® — AI-Powered Job Application Tracker
 
-## Getting Started
+JobX is a cinematic, single-page application tracker designed for deep thinkers and bold builders who want a clean, quiet space to manage their careers.
 
-First, run the development server:
+Featuring a beautiful **liquid-glass hero** layout with hardware-accelerated **60 FPS smooth scrolling**, JobX simplifies job application tracking, cover letter drafting, and deadline management.
 
+---
+
+## ✨ Features
+
+- **Cinematic Landing Page**: Built with a fullscreen looping background video, glassmorphic headers, and smooth delayed entry animations.
+- **Dead-Simple Board**: Manage job applications from initial wishlist to interviews and offers without bloated forms or walls.
+- **NVIDIA NIM Integration**: Unified deep learning cover letter composition and JD parsing powered by **DeepSeek-R1** at sub-400ms speeds.
+- **Privacy First**: Fully public access system without complex auth steps or login walls.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Core**: Next.js 14 (App Router) + TypeScript
+- **Styling**: Tailwind CSS + Custom HSL Glassmorphism Variables
+- **Database**: Supabase (Database + Row-level security policies)
+- **AI Engine**: NVIDIA NIM Chat completions API
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Keerthanreddy01/JobX.git
+cd JobX/jobx-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure Environment variables
+Create a `.env.local` file in the root of the `jobx-app` directory matching the following structure (these are kept safe locally and not committed to GitHub):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key_here
+NVIDIA_API_KEY=your_nvidia_api_key_here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Install Dependencies & Run
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+Open **[http://localhost:3000](http://localhost:3000)** in your browser to experience the journey.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛡️ RLS Database Schema
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To initialize the public database, run the following SQL scripts inside the Supabase editor:
 
-## Deploy on Vercel
+```sql
+CREATE TABLE job_applications (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  job_title TEXT NOT NULL,
+  company_name TEXT NOT NULL,
+  job_description TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'Applied',
+  application_date DATE NOT NULL DEFAULT CURRENT_DATE,
+  job_url TEXT,
+  notes TEXT,
+  skills_required TEXT[],
+  experience_level TEXT,
+  salary TEXT,
+  location TEXT,
+  responsibilities TEXT[],
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ALTER TABLE job_applications ENABLE ROW LEVEL SECURITY;
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+CREATE POLICY "Public full access"
+ON job_applications FOR ALL
+USING (true)
+WITH CHECK (true);
+```
