@@ -9,33 +9,33 @@ export function cn(...inputs: ClassValue[]) {
 export const STATUS_CONFIG: Record<JobStatus, { label: string; color: string; bg: string; dot: string }> = {
   applied: {
     label: 'Applied',
-    color: 'text-blue-400',
-    bg: 'bg-blue-500/20 border border-blue-500/30',
-    dot: 'bg-blue-400',
+    color: 'text-blue-700',
+    bg: 'bg-blue-50 border border-blue-200 text-blue-700',
+    dot: 'bg-blue-500',
   },
   interview: {
     label: 'Interview',
-    color: 'text-amber-400',
-    bg: 'bg-amber-500/20 border border-amber-500/30',
-    dot: 'bg-amber-400',
+    color: 'text-amber-700',
+    bg: 'bg-amber-50 border border-amber-200 text-amber-700',
+    dot: 'bg-amber-500',
   },
   offer: {
     label: 'Offer',
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-500/20 border border-emerald-500/30',
-    dot: 'bg-emerald-400',
+    color: 'text-emerald-700',
+    bg: 'bg-emerald-50 border border-emerald-200 text-emerald-700',
+    dot: 'bg-emerald-500',
   },
   rejected: {
     label: 'Rejected',
-    color: 'text-red-400',
-    bg: 'bg-red-500/20 border border-red-500/30',
-    dot: 'bg-red-400',
+    color: 'text-red-700',
+    bg: 'bg-red-50 border border-red-200 text-red-700',
+    dot: 'bg-red-500',
   },
   wishlist: {
     label: 'Wishlist',
-    color: 'text-purple-400',
-    bg: 'bg-purple-500/20 border border-purple-500/30',
-    dot: 'bg-purple-400',
+    color: 'text-gray-700',
+    bg: 'bg-gray-50 border border-gray-200 text-gray-700',
+    dot: 'bg-gray-400',
   },
 }
 

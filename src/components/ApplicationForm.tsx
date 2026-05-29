@@ -128,7 +128,6 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Failed to parse JD')
 
-      // The NVIDIA route returns { result } — try to parse as JSON first
       let formatted = ''
       try {
         const jsonMatch = (data.result as string).match(/\{[\s\S]*\}/)
@@ -191,34 +190,34 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
 
   return (
     <>
-      <form onSubmit={handleSave} className="space-y-6">
+      <form onSubmit={handleSave} className="space-y-6 select-none pb-12 pr-2">
         {error && (
-          <div className="flex items-center gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+          <div className="flex items-center gap-2 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             {error}
           </div>
         )}
 
-        {/* Core fields */}
-        <div className="glass-card p-6 space-y-5">
-          <h2 className="font-semibold text-white flex items-center gap-2">
-            <Briefcase className="w-4 h-4" style={{ color: '#a855f7' }} />
+        {/* Core fields card */}
+        <div className="glass-card bg-white p-6 space-y-6 border border-[#e9ecef]">
+          <h2 className="font-semibold text-[#1A1A1A] flex items-center gap-2 text-base border-b border-[#f1f3f5] pb-3">
+            <Briefcase className="w-4.5 h-4.5 text-[#7C3AED]" />
             Job Details
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="input-label" htmlFor="job-title">
-                Job Title <span className="text-red-400">*</span>
+              <label className="block text-[13px] font-semibold text-[#555566] mb-1.5" htmlFor="job-title">
+                Job Title <span className="text-red-500">*</span>
               </label>
               <div className="relative">
-                <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E8E93]" />
                 <input
                   id="job-title"
                   type="text"
                   value={form.job_title}
                   onChange={set('job_title')}
-                  className="input-field pl-10"
+                  className="input-field pl-10 border-[#e9ecef]"
                   placeholder="e.g. Senior Frontend Engineer"
                   required
                 />
@@ -226,17 +225,17 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             </div>
 
             <div>
-              <label className="input-label" htmlFor="company-name">
-                Company Name <span className="text-red-400">*</span>
+              <label className="block text-[13px] font-semibold text-[#555566] mb-1.5" htmlFor="company-name">
+                Company Name <span className="text-red-500">*</span>
               </label>
               <div className="relative">
-                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E8E93]" />
                 <input
                   id="company-name"
                   type="text"
                   value={form.company_name}
                   onChange={set('company_name')}
-                  className="input-field pl-10"
+                  className="input-field pl-10 border-[#e9ecef]"
                   placeholder="e.g. Google"
                   required
                 />
@@ -244,12 +243,12 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             </div>
 
             <div>
-              <label className="input-label" htmlFor="status">Status</label>
+              <label className="block text-[13px] font-semibold text-[#555566] mb-1.5" htmlFor="status">Status</label>
               <select
                 id="status"
                 value={form.status}
                 onChange={set('status')}
-                className="input-field"
+                className="input-field border-[#e9ecef] cursor-pointer"
               >
                 {STATUS_OPTIONS.map(o => (
                   <option key={o.value} value={o.value}>{o.label}</option>
@@ -258,62 +257,62 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             </div>
 
             <div>
-              <label className="input-label" htmlFor="job-url">Job URL (optional)</label>
+              <label className="block text-[13px] font-semibold text-[#555566] mb-1.5" htmlFor="job-url">Job URL (optional)</label>
               <div className="relative">
-                <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E8E93]" />
                 <input
                   id="job-url"
                   type="url"
                   value={form.job_url}
                   onChange={set('job_url')}
-                  className="input-field pl-10"
+                  className="input-field pl-10 border-[#e9ecef]"
                   placeholder="https://..."
                 />
               </div>
             </div>
 
             <div>
-              <label className="input-label" htmlFor="applied-date">Application Date</label>
+              <label className="block text-[13px] font-semibold text-[#555566] mb-1.5" htmlFor="applied-date">Application Date</label>
               <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E8E93]" />
                 <input
                   id="applied-date"
                   type="date"
                   value={form.applied_date}
                   onChange={set('applied_date')}
-                  className="input-field pl-10"
+                  className="input-field pl-10 border-[#e9ecef] cursor-pointer"
                 />
               </div>
             </div>
 
             <div>
-              <label className="input-label" htmlFor="follow-up-date">Follow-up Date (optional)</label>
+              <label className="block text-[13px] font-semibold text-[#555566] mb-1.5" htmlFor="follow-up-date">Follow-up Date (optional)</label>
               <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--text-muted)' }} />
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E8E93]" />
                 <input
                   id="follow-up-date"
                   type="date"
                   value={form.follow_up_date}
                   onChange={set('follow_up_date')}
-                  className="input-field pl-10"
+                  className="input-field pl-10 border-[#e9ecef] cursor-pointer"
                 />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Job Description + AI */}
-        <div className="glass-card p-6 space-y-4">
-          <div className="flex items-center justify-between flex-wrap gap-2">
+        {/* Job Description + AI card */}
+        <div className="glass-card bg-white p-6 space-y-4 border border-[#e9ecef]">
+          <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#f1f3f5] pb-3">
             <div>
-              <h2 className="font-semibold text-white flex items-center gap-2">
-                <FileText className="w-4 h-4" style={{ color: '#a855f7' }} />
+              <h2 className="font-semibold text-[#1A1A1A] flex items-center gap-2 text-base">
+                <FileText className="w-4.5 h-4.5 text-[#7C3AED]" />
                 Job Description
               </h2>
-              {/* NVIDIA badge */}
-              <div className="flex items-center gap-1 mt-1">
-                <Cpu className="w-3 h-3" style={{ color: '#76b900' }} />
-                <span className="text-xs" style={{ color: '#76b900' }}>Powered by NVIDIA NIM · DeepSeek R1</span>
+              {/* NVIDIA light badge */}
+              <div className="flex items-center gap-1.5 mt-1 bg-emerald-50 border border-emerald-100 rounded px-2 py-0.5 w-max">
+                <Cpu className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wide">NVIDIA NIM · DeepSeek R1</span>
               </div>
             </div>
             <div className="flex gap-2">
@@ -322,12 +321,12 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                 id="parse-jd-btn"
                 onClick={handleParseJD}
                 disabled={!!aiLoading}
-                className="btn-secondary text-xs py-1.5 px-3"
+                className="btn-secondary text-xs py-2 px-3.5 font-semibold"
               >
                 {aiLoading === 'parse' ? (
                   <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Parsing...</>
                 ) : (
-                  <><FileSearch className="w-3.5 h-3.5" /> Parse JD</>
+                  <><FileSearch className="w-3.5 h-3.5 text-[#7C3AED]" /> Parse JD</>
                 )}
               </button>
               <button
@@ -335,12 +334,12 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                 id="cover-letter-btn"
                 onClick={handleGenerateCoverLetter}
                 disabled={!!aiLoading}
-                className="btn-primary text-xs py-1.5 px-3"
+                className="btn-primary text-xs py-2 px-3.5 font-semibold"
               >
                 {aiLoading === 'cover' ? (
-                  <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Generating...</>
+                  <><Loader2 className="w-3.5 h-3.5 animate-spin text-white" /> Generating...</>
                 ) : (
-                  <><Wand2 className="w-3.5 h-3.5" /> Cover Letter</>
+                  <><Wand2 className="w-3.5 h-3.5 text-white" /> Cover Letter</>
                 )}
               </button>
             </div>
@@ -349,42 +348,42 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             id="job-description"
             value={form.job_description}
             onChange={set('job_description')}
-            className="input-field resize-none"
-            placeholder="Paste the full job description here… NVIDIA AI will extract skills, experience level, salary & responsibilities."
+            className="input-field resize-none border-[#e9ecef]"
+            placeholder="Paste the full job description here… NVIDIA DeepSeek R1 will automatically extract experience level, salary, skills, and responsibilities."
             rows={8}
           />
-          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-            Paste the JD → <strong style={{ color: 'var(--text-secondary)' }}>Parse JD</strong> extracts skills/salary/responsibilities, or <strong style={{ color: 'var(--text-secondary)' }}>Cover Letter</strong> generates a tailored letter via NVIDIA NIM.
+          <p className="text-xs text-[#8E8E93] leading-relaxed">
+            Paste the JD → Click <strong className="text-[#555566]">Parse JD</strong> to summarize keys, or <strong className="text-[#555566]">Cover Letter</strong> to craft paragraphs tailored for the role.
           </p>
         </div>
 
-        {/* Notes */}
-        <div className="glass-card p-6 space-y-4">
-          <h2 className="font-semibold text-white flex items-center gap-2">
-            <StickyNote className="w-4 h-4" style={{ color: '#a855f7' }} />
+        {/* Notes card */}
+        <div className="glass-card bg-white p-6 space-y-4 border border-[#e9ecef]">
+          <h2 className="font-semibold text-[#1A1A1A] flex items-center gap-2 text-base border-b border-[#f1f3f5] pb-3">
+            <StickyNote className="w-4.5 h-4.5 text-[#7C3AED]" />
             Notes
           </h2>
           <textarea
             id="notes"
             value={form.notes}
             onChange={set('notes')}
-            className="input-field resize-none"
-            placeholder="Referral info, interview prep notes, salary expectations…"
+            className="input-field resize-none border-[#e9ecef]"
+            placeholder="Referral contacts, networking prep notes, compensation expectations, or next step drafts…"
             rows={4}
           />
         </div>
 
-        {/* Actions */}
-        <div className="flex items-center justify-between">
+        {/* Actions panel */}
+        <div className="flex items-center justify-between pt-2">
           {existing ? (
             <button
               type="button"
               id="delete-app-btn"
               onClick={handleDelete}
               disabled={deleting}
-              className="btn-ghost text-red-400 hover:text-red-300 hover:bg-red-500/10"
+              className="btn-ghost text-red-600 hover:text-red-700 hover:bg-red-50 font-semibold text-sm flex items-center gap-1.5"
             >
-              {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+              {deleting ? <Loader2 className="w-4 h-4 animate-spin text-red-600" /> : <Trash2 className="w-4 h-4 text-red-600" />}
               {deleting ? 'Deleting…' : 'Delete Application'}
             </button>
           ) : <div />}
@@ -393,12 +392,12 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             type="submit"
             id="save-app-btn"
             disabled={saving}
-            className="btn-primary"
+            className="btn-primary hover:scale-[1.02] active:scale-95 transition-transform"
           >
             {saving ? (
-              <><Loader2 className="w-4 h-4 animate-spin" /> Saving…</>
+              <><Loader2 className="w-4 h-4 animate-spin text-white" /> Saving…</>
             ) : (
-              <><Save className="w-4 h-4" /> {existing ? 'Save Changes' : 'Add Application'}</>
+              <><Save className="w-4 h-4 text-white" /> {existing ? 'Save Changes' : 'Add Application'}</>
             )}
           </button>
         </div>

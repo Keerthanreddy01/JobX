@@ -7,7 +7,6 @@ import {
   Briefcase,
   PlusCircle,
   ChevronRight,
-  Cpu,
 } from 'lucide-react'
 
 const navItems = [
@@ -21,34 +20,21 @@ export default function Sidebar() {
 
   return (
     <aside
-      className="fixed top-0 left-0 h-full w-60 flex flex-col z-20"
-      style={{ background: 'rgba(10,10,15,0.95)', borderRight: '1px solid var(--border)', backdropFilter: 'blur(12px)' }}
+      className="fixed top-0 left-0 h-full w-60 flex flex-col z-20 bg-white border-r border-[#e9ecef] shadow-sm select-none"
     >
-      {/* Logo */}
-      <div className="px-5 py-5" style={{ borderBottom: '1px solid var(--border)' }}>
+      {/* Logo: JobX */}
+      <div className="px-6 py-6 border-b border-[#f1f3f5]">
         <Link href="/dashboard" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 to-purple-500 flex items-center justify-center shadow-lg shadow-violet-500/20 group-hover:shadow-violet-500/40 transition-shadow">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2"/>
-              <path d="M8 21h8M12 17v4"/>
-              <path d="M6 8h4M6 11h8"/>
-            </svg>
+          <div className="w-8 h-8 rounded-lg bg-[#7C3AED] flex items-center justify-center shadow-md shadow-[#7C3AED]/10 group-hover:scale-[1.03] transition-transform duration-200">
+            <Briefcase className="w-4 h-4 text-white" strokeWidth={2.5} />
           </div>
-          <span className="text-xl font-bold gradient-text">JobX</span>
+          <span className="text-lg font-bold text-[#1A1A1A] tracking-tight">JobX</span>
         </Link>
       </div>
 
-      {/* NVIDIA NIM Badge */}
-      <div className="px-4 py-3">
-        <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: 'rgba(118,185,0,0.08)', border: '1px solid rgba(118,185,0,0.2)' }}>
-          <Cpu className="w-3.5 h-3.5" style={{ color: '#76b900' }} />
-          <span className="text-xs font-medium" style={{ color: '#a3d44a' }}>NVIDIA NIM · DeepSeek R1</span>
-        </div>
-      </div>
-
       {/* Nav */}
-      <nav className="flex-1 px-3 py-2 space-y-1">
-        <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+      <nav className="flex-1 px-4 py-6 space-y-1">
+        <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-wider text-[#8E8E93]">
           Navigation
         </p>
         {navItems.map(({ href, label, icon: Icon }) => {
@@ -60,19 +46,19 @@ export default function Sidebar() {
             <Link
               key={href}
               href={href}
-              className={`nav-item ${isActive ? 'active' : ''}`}
+              className={`nav-item ${isActive ? 'active' : ''} mb-1`}
             >
-              <Icon className="w-4 h-4 flex-shrink-0" />
+              <Icon className={`w-4 h-4 flex-shrink-0 transition-colors ${isActive ? 'text-[#7C3AED]' : 'text-[#8E8E93]'}`} />
               <span className="flex-1">{label}</span>
-              {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+              {isActive && <ChevronRight className="w-3.5 h-3.5 text-[#7C3AED] opacity-75" />}
             </Link>
           )
         })}
       </nav>
 
       {/* Footer info */}
-      <div className="p-4" style={{ borderTop: '1px solid var(--border)' }}>
-        <p className="text-xs text-center" style={{ color: 'var(--text-muted)' }}>
+      <div className="p-4 border-t border-[#f1f3f5]">
+        <p className="text-[11px] text-center text-[#8E8E93] font-medium tracking-wide">
           JobX · AI Job Tracker
         </p>
       </div>
