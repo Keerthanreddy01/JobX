@@ -40,8 +40,8 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-[#1A1A1A]">Applications</h1>
-          <p className="text-sm mt-1 text-[#8E8E93]">
+          <h1 className="text-2xl font-bold tracking-tight text-white">Applications</h1>
+          <p className="text-sm mt-1 text-[#cbd5e1]">
             {applications.length} total · {filtered.length} shown
           </p>
         </div>
@@ -50,30 +50,30 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
           id="add-application-btn" 
           className="btn-primary hover:scale-[1.02] active:scale-95 transition-transform"
         >
-          <Plus className="w-4 h-4" /> Add Application
+          <Plus className="w-4 h-4 text-white" /> Add Application
         </Link>
       </div>
 
       {/* Filters Card */}
-      <div className="glass-card bg-white p-5 border border-[#e9ecef]">
+      <div className="glass-card p-5 border border-white/5 bg-white/5">
         <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
           {/* Search Input */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-[#8E8E93]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-[#94a3b8]" />
             <input
               id="applications-search"
               type="text"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="input-field pl-10 h-10 border-[#e9ecef]"
+              className="input-field pl-10 h-10 border-white/5"
               placeholder="Search by company or job title…"
             />
           </div>
 
           {/* Status Filter Buttons */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 flex-shrink-0">
-            <span className="text-xs font-semibold text-[#8E8E93] flex items-center gap-1.5 shrink-0">
-              <Filter className="w-3.5 h-3.5" /> Filter:
+            <span className="text-xs font-semibold text-[#cbd5e1] flex items-center gap-1.5 shrink-0">
+              <Filter className="w-3.5 h-3.5 text-[#94a3b8]" /> Filter:
             </span>
             <div className="flex gap-1.5 flex-wrap">
               {ALL_STATUSES.map(({ value, label }) => {
@@ -87,14 +87,14 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
                     style={
                       isSelected
                         ? { 
-                            backgroundColor: 'rgba(124,58,237,0.08)', 
-                            color: '#7C3AED', 
-                            borderColor: 'rgba(124,58,237,0.3)',
+                            backgroundColor: 'rgba(124,58,237,0.15)', 
+                            color: '#c084fc', 
+                            borderColor: 'rgba(124,58,237,0.4)',
                           }
                         : { 
-                            backgroundColor: '#ffffff', 
-                            color: '#555566', 
-                            borderColor: '#e9ecef',
+                            backgroundColor: 'rgba(255, 255, 255, 0.02)', 
+                            color: '#cbd5e1', 
+                            borderColor: 'rgba(255, 255, 255, 0.08)',
                           }
                     }
                   >
@@ -109,15 +109,15 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
 
       {/* Applications List Grid */}
       {filtered.length === 0 ? (
-        <div className="glass-card bg-white p-16 text-center border border-[#e9ecef]">
-          <Briefcase className="w-12 h-12 mx-auto mb-4 text-[#8E8E93] opacity-35" />
-          <p className="font-semibold text-[#1A1A1A] mb-1">No applications found</p>
-          <p className="text-sm text-[#8E8E93]">
+        <div className="glass-card p-16 text-center border border-white/5 bg-white/5">
+          <Briefcase className="w-12 h-12 mx-auto mb-4 text-[#cbd5e1] opacity-35" />
+          <p className="font-semibold text-white mb-1">No applications found</p>
+          <p className="text-sm text-[#cbd5e1]">
             {search || statusFilter !== 'all' ? 'Try adjusting your search query or filter settings' : 'Add your first job application to get started!'}
           </p>
           {!search && statusFilter === 'all' && (
             <Link href="/dashboard/add" className="mt-4 btn-primary inline-flex">
-              <Plus className="w-4 h-4" /> Add Application
+              <Plus className="w-4 h-4 text-white" /> Add Application
             </Link>
           )}
         </div>
@@ -131,7 +131,7 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
               <Link
                 key={app.id}
                 href={`/dashboard/applications/${app.id}`}
-                className="glass-card bg-white flex items-center gap-5 px-6 py-4.5 group border border-[#e9ecef] hover:bg-violet-50/20 transition-all duration-300"
+                className="glass-card flex items-center gap-5 px-6 py-4.5 group border border-white/5 hover:bg-white/5 transition-all duration-300"
               >
                 {/* Thick Status left border helper */}
                 <div
@@ -142,14 +142,14 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
                 {/* Company & Role Details */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="font-bold text-sm text-[#1A1A1A] truncate group-hover:text-[#7C3AED] transition-colors">
+                    <p className="font-bold text-sm text-white truncate group-hover:text-violet-300 transition-colors">
                       {app.job_title}
                     </p>
                     {app.job_url && (
-                      <ExternalLink className="w-3.5 h-3.5 text-[#8E8E93] opacity-50 shrink-0" />
+                      <ExternalLink className="w-3.5 h-3.5 text-[#cbd5e1] opacity-50 shrink-0" />
                     )}
                   </div>
-                  <p className="text-xs text-[#555566] font-medium mt-1">
+                  <p className="text-xs text-[#cbd5e1] font-medium mt-1">
                     {app.company_name}
                   </p>
                 </div>
@@ -160,21 +160,21 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
                     <div 
                       className={`flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded ${
                         overdue 
-                          ? 'text-red-700 bg-red-50 border border-red-100' 
-                          : 'text-[#555566] bg-slate-50 border border-slate-100'
+                          ? 'text-red-300 bg-red-500/15 border border-red-500/25' 
+                          : 'text-[#cbd5e1] bg-white/5 border border-white/10'
                       }`}
                     >
                       {overdue ? (
-                        <AlertCircle className="w-3 h-3 text-red-500 shrink-0" />
+                        <AlertCircle className="w-3 h-3 text-red-400 shrink-0" />
                       ) : (
-                        <Clock className="w-3 h-3 text-[#8E8E93] shrink-0" />
+                        <Clock className="w-3 h-3 text-[#94a3b8] shrink-0" />
                       )}
                       <span>
                         {overdue ? 'Overdue' : 'Follow-up'}: {formatDate(app.follow_up_date)}
                       </span>
                     </div>
                   )}
-                  <p className="text-[11px] text-[#8E8E93] font-medium">
+                  <p className="text-[11px] text-[#cbd5e1] font-medium">
                     Applied: {formatDate(app.applied_date)}
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
                 </span>
 
                 {/* Arrow Navigation trigger */}
-                <ChevronRight className="w-5 h-5 flex-shrink-0 text-[#8E8E93] opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" />
+                <ChevronRight className="w-5 h-5 flex-shrink-0 text-[#cbd5e1] opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" />
               </Link>
             )
           })}

@@ -69,10 +69,10 @@ export default async function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-[#1A1A1A]">
+          <h1 className="text-2xl font-bold tracking-tight text-white">
             Dashboard
           </h1>
-          <p className="mt-1 text-sm text-[#8E8E93]">
+          <p className="mt-1 text-sm text-[#cbd5e1]">
             Track and manage your active career applications.
           </p>
         </div>
@@ -81,7 +81,7 @@ export default async function DashboardPage() {
           id="dashboard-add-btn" 
           className="btn-primary hover:scale-[1.02] active:scale-95 transition-transform"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 text-white" />
           Add Application
         </Link>
       </div>
@@ -91,15 +91,15 @@ export default async function DashboardPage() {
         {statCards.map(({ label, value, borderLeftClass, color }) => (
           <div
             key={label}
-            className={`glass-card p-5 bg-white flex flex-col justify-between min-h-[110px] ${borderLeftClass}`}
+            className={`glass-card p-5 flex flex-col justify-between min-h-[110px] ${borderLeftClass}`}
           >
             <div className="flex justify-between items-start">
-              <span className="text-[13px] font-medium text-[#555566]">{label}</span>
-              <TrendingUp className="w-3.5 h-3.5 text-[#8E8E93] opacity-60" style={{ color }} />
+              <span className="text-[13px] font-medium text-[#cbd5e1]">{label}</span>
+              <TrendingUp className="w-3.5 h-3.5" style={{ color }} />
             </div>
             <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-bold text-[#1A1A1A] tracking-tight">{value}</span>
-              <span className="text-[10px] text-[#10b981] font-semibold bg-emerald-50 px-1 rounded">
+              <span className="text-3xl font-bold text-white tracking-tight">{value}</span>
+              <span className="text-[10px] text-emerald-400 font-semibold bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">
                 +12%
               </span>
             </div>
@@ -110,15 +110,15 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Applications Section */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="glass-card bg-white overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-5 border-b border-[#f1f3f5]">
-              <h2 className="font-semibold text-[#1A1A1A] flex items-center gap-2 text-base">
-                <Clock className="w-4.5 h-4.5 text-[#7C3AED]" />
+          <div className="glass-card overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
+              <h2 className="font-semibold text-white flex items-center gap-2 text-base">
+                <Clock className="w-4.5 h-4.5 text-violet-400" />
                 Recent Applications
               </h2>
               <Link 
                 href="/dashboard/applications" 
-                className="text-xs font-semibold text-[#7C3AED] hover:underline flex items-center gap-1"
+                className="text-xs font-semibold text-violet-300 hover:text-white flex items-center gap-1 transition-colors"
               >
                 View all <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -126,42 +126,42 @@ export default async function DashboardPage() {
 
             {recentApps.length === 0 ? (
               <div className="px-6 py-16 text-center">
-                <Briefcase className="w-12 h-12 mx-auto mb-4 text-[#8E8E93] opacity-30" />
-                <p className="text-sm font-medium text-[#555566]">Add your first application to get started</p>
+                <Briefcase className="w-12 h-12 mx-auto mb-4 text-[#94a3b8] opacity-35" />
+                <p className="text-sm font-medium text-[#cbd5e1]">Add your first application to get started</p>
                 <Link href="/dashboard/add" className="mt-4 inline-flex btn-primary text-sm py-2">
-                  <Plus className="w-4 h-4" /> Add Application
+                  <Plus className="w-4 h-4 text-white" /> Add Application
                 </Link>
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="bg-[#f8f9fa] border-b border-[#f1f3f5]">
-                      <th className="px-6 py-3.5 text-xs font-semibold text-[#8E8E93] uppercase tracking-wider">Company</th>
-                      <th className="px-6 py-3.5 text-xs font-semibold text-[#8E8E93] uppercase tracking-wider">Role</th>
-                      <th className="px-6 py-3.5 text-xs font-semibold text-[#8E8E93] uppercase tracking-wider">Status</th>
-                      <th className="px-6 py-3.5 text-xs font-semibold text-[#8E8E93] uppercase tracking-wider">Applied</th>
-                      <th className="px-6 py-3.5 text-xs font-semibold text-[#8E8E93] uppercase tracking-wider">Follow-Up</th>
+                    <tr className="bg-white/5 border-b border-white/5">
+                      <th className="px-6 py-3.5 text-xs font-semibold text-[#cbd5e1] uppercase tracking-wider">Company</th>
+                      <th className="px-6 py-3.5 text-xs font-semibold text-[#cbd5e1] uppercase tracking-wider">Role</th>
+                      <th className="px-6 py-3.5 text-xs font-semibold text-[#cbd5e1] uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3.5 text-xs font-semibold text-[#cbd5e1] uppercase tracking-wider">Applied</th>
+                      <th className="px-6 py-3.5 text-xs font-semibold text-[#cbd5e1] uppercase tracking-wider">Follow-Up</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#f1f3f5]">
+                  <tbody className="divide-y divide-white/5">
                     {recentApps.map(app => {
                       const config = STATUS_CONFIG[app.status]
                       return (
                         <tr 
                           key={app.id}
-                          className="group cursor-pointer hover:bg-violet-50/20 transition-colors"
+                          className="group cursor-pointer hover:bg-white/5 transition-colors"
                         >
                           <td className="px-6 py-4.5">
                             <Link href={`/dashboard/applications/${app.id}`} className="block">
-                              <span className="font-semibold text-sm text-[#1A1A1A] group-hover:text-[#7C3AED] transition-colors">
+                              <span className="font-semibold text-sm text-white group-hover:text-violet-300 transition-colors">
                                 {app.company_name}
                               </span>
                             </Link>
                           </td>
                           <td className="px-6 py-4.5">
                             <Link href={`/dashboard/applications/${app.id}`} className="block">
-                              <span className="text-sm text-[#555566] font-medium">{app.job_title}</span>
+                              <span className="text-sm text-[#cbd5e1] font-medium">{app.job_title}</span>
                             </Link>
                           </td>
                           <td className="px-6 py-4.5">
@@ -173,12 +173,12 @@ export default async function DashboardPage() {
                             </Link>
                           </td>
                           <td className="px-6 py-4.5">
-                            <Link href={`/dashboard/applications/${app.id}`} className="block text-xs text-[#8E8E93] font-medium">
+                            <Link href={`/dashboard/applications/${app.id}`} className="block text-xs text-[#cbd5e1] font-medium">
                               {formatDate(app.applied_date)}
                             </Link>
                           </td>
                           <td className="px-6 py-4.5">
-                            <Link href={`/dashboard/applications/${app.id}`} className="block text-xs text-[#8E8E93] font-medium">
+                            <Link href={`/dashboard/applications/${app.id}`} className="block text-xs text-[#cbd5e1] font-medium">
                               {app.follow_up_date ? formatDate(app.follow_up_date) : '—'}
                             </Link>
                           </td>
@@ -195,14 +195,14 @@ export default async function DashboardPage() {
         {/* Side Panel: Reminders & Metrics */}
         <div className="space-y-6">
           {/* Reminders Section */}
-          <div className="glass-card bg-white overflow-hidden">
-            <div className="flex items-center justify-between px-5 py-4.5 border-b border-[#f1f3f5]">
-              <h2 className="font-semibold text-[#1A1A1A] flex items-center gap-2 text-sm sm:text-base">
-                <Bell className="w-4 h-4 text-[#7C3AED]" />
+          <div className="glass-card overflow-hidden">
+            <div className="flex items-center justify-between px-5 py-4.5 border-b border-white/5">
+              <h2 className="font-semibold text-white flex items-center gap-2 text-sm sm:text-base">
+                <Bell className="w-4 h-4 text-violet-400" />
                 Reminders
               </h2>
               {overdueFollowUps.length > 0 && (
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-200">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-300 border border-red-500/20">
                   {overdueFollowUps.length} overdue
                 </span>
               )}
@@ -211,8 +211,8 @@ export default async function DashboardPage() {
             <div className="p-4 space-y-3">
               {overdueFollowUps.length === 0 && dueSoonFollowUps.length === 0 ? (
                 <div className="text-center py-10">
-                  <Bell className="w-8 h-8 mx-auto mb-2 text-[#8E8E93] opacity-20" />
-                  <p className="text-xs text-[#8E8E93]">No upcoming follow-ups</p>
+                  <Bell className="w-8 h-8 mx-auto mb-2 text-[#94a3b8] opacity-20" />
+                  <p className="text-xs text-[#94a3b8]">No upcoming follow-ups</p>
                 </div>
               ) : (
                 <>
@@ -220,18 +220,18 @@ export default async function DashboardPage() {
                     <Link
                       key={app.id}
                       href={`/dashboard/applications/${app.id}`}
-                      className="block p-3.5 rounded-xl border border-red-100 bg-red-50/30 hover:bg-red-50/60 transition-colors"
+                      className="block p-3.5 rounded-xl border border-red-500/20 bg-red-500/10 hover:bg-red-500/15 transition-colors"
                     >
                       <div className="flex items-start gap-2.5">
-                        <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
+                        <AlertCircle className="w-4 h-4 text-red-400 mt-0.5 shrink-0" />
                         <div className="min-w-0 flex-1">
-                          <p className="text-xs font-bold text-red-800 truncate">{app.company_name}</p>
-                          <p className="text-xs text-red-700/80 truncate mt-0.5">{app.job_title}</p>
+                          <p className="text-xs font-bold text-red-300 truncate">{app.company_name}</p>
+                          <p className="text-xs text-red-400/80 truncate mt-0.5">{app.job_title}</p>
                           <div className="flex justify-between items-center mt-2">
-                            <span className="text-[10px] font-bold text-red-600 bg-red-50 border border-red-100 rounded px-1.5 py-0.5 uppercase tracking-wide">
+                            <span className="text-[10px] font-bold text-red-300 bg-red-500/20 border border-red-500/30 rounded px-1.5 py-0.5 uppercase tracking-wide">
                               Overdue
                             </span>
-                            <span className="text-[10px] text-red-600 font-medium">{formatDate(app.follow_up_date)}</span>
+                            <span className="text-[10px] text-red-300 font-medium">{formatDate(app.follow_up_date)}</span>
                           </div>
                         </div>
                       </div>
@@ -241,15 +241,15 @@ export default async function DashboardPage() {
                     <Link
                       key={app.id}
                       href={`/dashboard/applications/${app.id}`}
-                      className="block p-3.5 rounded-xl border border-amber-100 bg-amber-50/20 hover:bg-amber-50/40 transition-colors"
+                      className="block p-3.5 rounded-xl border border-amber-500/20 bg-amber-500/10 hover:bg-amber-500/15 transition-colors"
                     >
                       <div className="flex items-start gap-2.5">
-                        <Clock className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                        <Clock className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
                         <div className="min-w-0 flex-1">
-                          <p className="text-xs font-bold text-amber-800 truncate">{app.company_name}</p>
-                          <p className="text-xs text-amber-700/80 truncate mt-0.5">{app.job_title}</p>
+                          <p className="text-xs font-bold text-amber-300 truncate">{app.company_name}</p>
+                          <p className="text-xs text-amber-400/80 truncate mt-0.5">{app.job_title}</p>
                           <div className="flex justify-between items-center mt-2">
-                            <span className="text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-100 rounded px-1.5 py-0.5 uppercase tracking-wide">
+                            <span className="text-[10px] font-bold text-amber-300 bg-amber-500/20 border border-amber-500/30 rounded px-1.5 py-0.5 uppercase tracking-wide">
                               Upcoming
                             </span>
                             <span className="text-[10px] text-amber-600 font-medium">{formatDate(app.follow_up_date)}</span>
@@ -265,8 +265,8 @@ export default async function DashboardPage() {
 
           {/* Quick stats / Progress bar */}
           {apps.length > 0 && (
-            <div className="glass-card bg-white p-5">
-              <h3 className="text-sm font-semibold text-[#1A1A1A] mb-4">Response Distribution</h3>
+            <div className="glass-card p-5">
+              <h3 className="text-sm font-semibold text-white mb-4">Response Distribution</h3>
               <div className="space-y-3.5">
                 {(['applied', 'interview', 'offer', 'rejected', 'wishlist'] as const).map(status => {
                   const count = apps.filter(a => a.status === status).length
@@ -275,19 +275,19 @@ export default async function DashboardPage() {
                   return (
                     <div key={status}>
                       <div className="flex justify-between text-xs mb-1.5">
-                        <span className="text-[#555566] font-medium">{cfg.label}</span>
-                        <span className="text-[#8E8E93] font-semibold">{count} ({pct}%)</span>
+                        <span className="text-[#cbd5e1] font-medium">{cfg.label}</span>
+                        <span className="text-[#cbd5e1] font-semibold">{count} ({pct}%)</span>
                       </div>
-                      <div className="h-2 bg-[#f1f3f5] rounded-full overflow-hidden">
+                      <div className="h-2 bg-white/5 rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all duration-700"
                           style={{ 
                             width: `${pct}%`, 
                             backgroundColor: cfg.dot.includes('bg-') ? '' : cfg.dot,
-                            background: cfg.dot === 'bg-blue-500' ? '#3b82f6' : 
-                                       cfg.dot === 'bg-amber-500' ? '#f59e0b' : 
-                                       cfg.dot === 'bg-emerald-500' ? '#10b981' : 
-                                       cfg.dot === 'bg-red-500' ? '#ef4444' : '#8E8E93'
+                            background: cfg.dot === 'bg-blue-500' || cfg.dot === 'bg-blue-400' ? '#60a5fa' : 
+                                       cfg.dot === 'bg-amber-500' || cfg.dot === 'bg-amber-400' ? '#fbbf24' : 
+                                       cfg.dot === 'bg-emerald-500' || cfg.dot === 'bg-emerald-400' ? '#34d399' : 
+                                       cfg.dot === 'bg-red-500' || cfg.dot === 'bg-red-400' ? '#f87171' : '#cbd5e1'
                           }}
                         />
                       </div>
