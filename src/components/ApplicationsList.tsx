@@ -23,6 +23,18 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<JobStatus | 'all'>('all')
 
+  const getCompanyBadgeColor = (char: string) => {
+    const code = char.toUpperCase().charCodeAt(0) % 5
+    const colors = [
+      { bg: 'bg-[#E8E4FF]', text: 'text-[#7C3AED]' }, // Lavender
+      { bg: 'bg-[#FFE4EC]', text: 'text-[#DB2777]' }, // Pink
+      { bg: 'bg-[#FFF0E4]', text: 'text-[#EA580C]' }, // Peach
+      { bg: 'bg-[#E4F0FF]', text: 'text-[#2563EB]' }, // Blue
+      { bg: 'bg-[#E6F4EA]', text: 'text-[#137333]' }, // Green
+    ]
+    return colors[isNaN(code) ? 0 : code]
+  }
+
   const filtered = useMemo(() => {
     return applications.filter(app => {
       const matchesStatus = statusFilter === 'all' || app.status === statusFilter
@@ -55,7 +67,7 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
       </div>
 
       {/* Filters Card */}
-      <div className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] p-5 rounded-[12px] shadow-sm">
+      <div className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] p-6 rounded-[20px]">
         <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
           {/* Search Input */}
           <div className="relative flex-1">
@@ -65,14 +77,14 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
               type="text"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="input-field pl-10 h-10 border-[#E5E7EB]"
+              className="input-field pl-10 h-11"
               placeholder="Search by company or job title…"
             />
           </div>
 
           {/* Status Filter Buttons */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 flex-shrink-0">
-            <span className="text-xs font-semibold text-[#6B7280] flex items-center gap-1.5 shrink-0">
+            <span className="text-xs font-bold text-[#6B7280] flex items-center gap-1.5 shrink-0">
               <Filter className="w-3.5 h-3.5" /> Filter:
             </span>
             <div className="flex gap-1.5 flex-wrap">
@@ -89,12 +101,12 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
                         ? { 
                             backgroundColor: '#F3F0FF', 
                             color: '#7C3AED', 
-                            borderColor: '#7C3AED',
+                            borderColor: '#E8E4FF',
                           }
                         : { 
                             backgroundColor: '#FFFFFF', 
                             color: '#6B7280', 
-                            borderColor: '#E5E7EB',
+                            borderColor: '#F3F4F6',
                           }
                     }
                   >
@@ -109,9 +121,9 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
 
       {/* Applications List Grid */}
       {filtered.length === 0 ? (
-        <div className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] p-16 text-center rounded-[12px] shadow-sm">
+        <div className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] p-16 text-center rounded-[20px]">
           <Briefcase className="w-12 h-12 mx-auto mb-4 text-[#6B7280] opacity-40" />
-          <p className="font-semibold text-[#111827] mb-1">No applications found</p>
+          <p className="font-bold text-[#111827] mb-1">No applications found</p>
           <p className="text-sm text-[#6B7280]">
             {search || statusFilter !== 'all' ? 'Try adjusting your search query or filter settings' : 'Add your first job application to get started!'}
           </p>
@@ -122,22 +134,23 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
           )}
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           {filtered.map(app => {
             const config = STATUS_CONFIG[app.status]
             const overdue = app.follow_up_date && isOverdue(app.follow_up_date) && app.status !== 'rejected' && app.status !== 'offer'
+            const initial = app.company_name ? app.company_name.charAt(0).toUpperCase() : '?'
+            const badgeColor = getCompanyBadgeColor(initial)
 
             return (
               <Link
                 key={app.id}
                 href={`/dashboard/applications/${app.id}`}
-                className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] flex items-center gap-5 px-6 py-4.5 group hover:bg-[#F9FAFB] transition-all duration-150 shadow-sm"
+                className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] rounded-[20px] flex items-center gap-5 px-6 py-4 group hover:bg-[#F8F7FF] hover:scale-[1.01] hover:shadow-[0_6px_25px_rgba(0,0,0,0.03)] transition-all duration-150"
               >
-                {/* Thick Status left border helper */}
-                <div
-                  className={`w-1 rounded-full flex-shrink-0 self-stretch ${config.dot}`}
-                  style={{ minHeight: '30px' }}
-                />
+                {/* Company Initials Logo Badge */}
+                <div className={`w-10 h-10 rounded-full ${badgeColor.bg} ${badgeColor.text} font-bold flex items-center justify-center text-sm shrink-0 shadow-sm group-hover:scale-105 transition-transform`}>
+                  {initial}
+                </div>
 
                 {/* Company & Role Details */}
                 <div className="flex-1 min-w-0">
@@ -149,7 +162,7 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
                       <ExternalLink className="w-3.5 h-3.5 text-[#6B7280] opacity-50 shrink-0" />
                     )}
                   </div>
-                  <p className="text-xs text-[#6B7280] font-medium mt-1">
+                  <p className="text-xs text-[#6B7280] font-semibold mt-1">
                     {app.company_name}
                   </p>
                 </div>
@@ -161,7 +174,7 @@ export default function ApplicationsList({ applications }: ApplicationsListProps
                       className={`flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded ${
                         overdue 
                           ? 'text-[#B91C1C] bg-[#FEF2F2] border border-[#FEE2E2]' 
-                          : 'text-[#6B7280] bg-[#F3F4F6] border border-[#E5E7EB]'
+                          : 'text-[#6B7280] bg-[#F3F4F6] border border-[#F3F4F6]'
                       }`}
                     >
                       {overdue ? (

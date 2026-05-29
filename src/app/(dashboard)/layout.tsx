@@ -6,12 +6,12 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen flex bg-[#F5F5F5] relative select-none">
-      {/* Pure White Sidebar */}
+    <div className="min-h-screen flex bg-[#F8F7FF] relative select-none">
+      {/* Premium Dark Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
-      <main className="flex-1 ml-60 min-h-screen bg-[#F5F5F5]">
+      <main className="flex-1 ml-60 min-h-screen bg-[#F8F7FF]">
         <div className="max-w-6xl mx-auto px-8 py-8">
           {children}
         </div>

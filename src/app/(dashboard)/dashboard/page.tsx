@@ -37,30 +37,46 @@ export default async function DashboardPage() {
     a => a.follow_up_date && isDueSoon(a.follow_up_date) && !isOverdue(a.follow_up_date)
   )
 
+  const getCompanyBadgeColor = (char: string) => {
+    const code = char.toUpperCase().charCodeAt(0) % 5
+    const colors = [
+      { bg: 'bg-[#E8E4FF]', text: 'text-[#7C3AED]' }, // Lavender
+      { bg: 'bg-[#FFE4EC]', text: 'text-[#DB2777]' }, // Pink
+      { bg: 'bg-[#FFF0E4]', text: 'text-[#EA580C]' }, // Peach
+      { bg: 'bg-[#E4F0FF]', text: 'text-[#2563EB]' }, // Blue
+      { bg: 'bg-[#E6F4EA]', text: 'text-[#137333]' }, // Green
+    ]
+    return colors[isNaN(code) ? 0 : code]
+  }
+
   const statCards = [
     {
       label: 'Total Applied',
       value: stats.total,
       icon: Briefcase,
-      color: '#3B82F6', // Blue
+      color: '#7C3AED',
+      bg: '#E8E4FF',
     },
     {
       label: 'Interviews Scheduled',
       value: stats.interviews,
       icon: Calendar,
-      color: '#F59E0B', // Amber
+      color: '#DB2777',
+      bg: '#FFE4EC',
     },
     {
       label: 'Offers Received',
       value: stats.offers,
       icon: TrendingUp,
-      color: '#10B981', // Green
+      color: '#EA580C',
+      bg: '#FFF0E4',
     },
     {
       label: 'Rejections',
       value: stats.rejections,
       icon: XCircle,
-      color: '#EF4444', // Red
+      color: '#2563EB',
+      bg: '#E4F0FF',
     },
   ]
 
@@ -88,17 +104,20 @@ export default async function DashboardPage() {
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        {statCards.map(({ label, value, icon: Icon, color }) => (
+        {statCards.map(({ label, value, icon: Icon, color, bg }) => (
           <div
             key={label}
-            className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-6 flex flex-col justify-between min-h-[120px] shadow-sm hover:border-[#DEE2E6] hover:shadow-md transition-all"
+            className="rounded-[20px] p-6 flex flex-col justify-between min-h-[140px] shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all hover:scale-[1.02] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+            style={{ backgroundColor: bg }}
           >
             <div className="flex justify-between items-start">
-              <span className="text-[13px] font-semibold text-[#6B7280]">{label}</span>
-              <Icon className="w-5 h-5 shrink-0" style={{ color }} />
+              <span className="text-[13px] font-semibold text-[#5C5A6E] tracking-tight">{label}</span>
+              <div className="p-2 rounded-xl bg-white/60 backdrop-blur-sm shadow-[0_2px_10px_rgba(0,0,0,0.01)] flex items-center justify-center">
+                <Icon className="w-4 h-4 shrink-0" style={{ color }} />
+              </div>
             </div>
-            <div className="mt-3">
-              <span className="text-[36px] font-bold text-[#111827] leading-none tracking-tight">{value}</span>
+            <div className="mt-4">
+              <span className="text-[40px] font-bold text-neutral-900 leading-none tracking-tight">{value}</span>
             </div>
           </div>
         ))}
@@ -107,9 +126,9 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Applications Table Card */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] overflow-hidden shadow-sm">
-            <div className="flex items-center justify-between px-6 py-5 border-b border-[#E5E7EB]">
-              <h2 className="font-semibold text-[#111827] flex items-center gap-2 text-base">
+          <div className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] rounded-[20px] overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-[#F3F4F6]">
+              <h2 className="font-bold text-[#111827] flex items-center gap-2 text-base">
                 <Clock className="w-4.5 h-4.5 text-[#6B7280]" />
                 Recent Applications
               </h2>
@@ -133,7 +152,7 @@ export default async function DashboardPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
+                    <tr className="bg-[#FAFBFD] border-b border-[#F3F4F6]">
                       <th className="px-6 py-3.5 text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Company</th>
                       <th className="px-6 py-3.5 text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Role</th>
                       <th className="px-6 py-3.5 text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Status</th>
@@ -141,17 +160,22 @@ export default async function DashboardPage() {
                       <th className="px-6 py-3.5 text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Follow-Up</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#E5E7EB]">
+                  <tbody className="divide-y divide-[#F3F4F6]">
                     {recentApps.map(app => {
                       const config = STATUS_CONFIG[app.status]
+                      const initial = app.company_name ? app.company_name.charAt(0).toUpperCase() : '?'
+                      const badgeColor = getCompanyBadgeColor(initial)
                       return (
                         <tr 
                           key={app.id}
-                          className="group cursor-pointer hover:bg-[#F9FAFB] h-12 transition-colors"
+                          className="group cursor-pointer hover:bg-[#F8F7FF] h-14 transition-colors"
                         >
                           <td className="px-6 py-3">
-                            <Link href={`/dashboard/applications/${app.id}`} className="block">
-                              <span className="font-semibold text-sm text-[#111827] group-hover:text-[#7C3AED] transition-colors">
+                            <Link href={`/dashboard/applications/${app.id}`} className="flex items-center gap-3">
+                              <div className={`w-8 h-8 rounded-full ${badgeColor.bg} ${badgeColor.text} font-bold flex items-center justify-center text-xs shrink-0 shadow-sm`}>
+                                {initial}
+                              </div>
+                              <span className="font-semibold text-sm text-[#111827] group-hover:text-[#7C3AED] transition-colors truncate max-w-[140px]">
                                 {app.company_name}
                               </span>
                             </Link>
@@ -191,14 +215,14 @@ export default async function DashboardPage() {
         {/* Side Panel: Reminders & Metrics Card */}
         <div className="space-y-6">
           {/* Reminders Card */}
-          <div className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] overflow-hidden shadow-sm">
-            <div className="flex items-center justify-between px-5 py-4.5 border-b border-[#E5E7EB]">
-              <h2 className="font-semibold text-[#111827] flex items-center gap-2 text-base">
+          <div className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] rounded-[20px] overflow-hidden">
+            <div className="flex items-center justify-between px-5 py-4.5 border-b border-[#F3F4F6]">
+              <h2 className="font-bold text-[#111827] flex items-center gap-2 text-base">
                 <Bell className="w-4.5 h-4.5 text-[#6B7280]" />
                 Reminders
               </h2>
               {overdueFollowUps.length > 0 && (
-                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#FEF2F2] text-[#B91C1C]">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FEF2F2] text-[#B91C1C]">
                   {overdueFollowUps.length} overdue
                 </span>
               )}
@@ -216,7 +240,7 @@ export default async function DashboardPage() {
                     <Link
                       key={app.id}
                       href={`/dashboard/applications/${app.id}`}
-                      className="block p-3.5 rounded-xl border border-[#EF4444]/20 bg-[#FEF2F2] hover:bg-[#FEE2E2] transition-colors"
+                      className="block p-3.5 rounded-[14px] border border-[#EF4444]/10 bg-[#FEF2F2] hover:bg-[#FEE2E2] transition-colors"
                     >
                       <div className="flex items-start gap-2.5">
                         <AlertCircle className="w-4 h-4 text-[#EF4444] mt-0.5 shrink-0" />
@@ -224,7 +248,7 @@ export default async function DashboardPage() {
                           <p className="text-xs font-bold text-[#111827] truncate">{app.company_name}</p>
                           <p className="text-xs text-[#6B7280] truncate mt-0.5">{app.job_title}</p>
                           <div className="flex justify-between items-center mt-2">
-                            <span className="text-[10px] font-bold text-[#B91C1C] bg-[#FEF2F2] border border-[#FEE2E2] rounded px-1.5 py-0.5 uppercase tracking-wide">
+                            <span className="text-[9px] font-bold text-[#B91C1C] bg-white/80 border border-[#FEE2E2] rounded px-1.5 py-0.5 uppercase tracking-wide">
                               Overdue
                             </span>
                             <span className="text-[10px] text-[#B91C1C] font-semibold">{formatDate(app.follow_up_date)}</span>
@@ -237,7 +261,7 @@ export default async function DashboardPage() {
                     <Link
                       key={app.id}
                       href={`/dashboard/applications/${app.id}`}
-                      className="block p-3.5 rounded-xl border border-[#F59E0B]/20 bg-[#FFFBEB] hover:bg-[#FEF3C7] transition-colors"
+                      className="block p-3.5 rounded-[14px] border border-[#F59E0B]/10 bg-[#FFFBEB] hover:bg-[#FEF3C7] transition-colors"
                     >
                       <div className="flex items-start gap-2.5">
                         <Clock className="w-4 h-4 text-[#F59E0B] mt-0.5 shrink-0" />
@@ -245,7 +269,7 @@ export default async function DashboardPage() {
                           <p className="text-xs font-bold text-[#111827] truncate">{app.company_name}</p>
                           <p className="text-xs text-[#6B7280] truncate mt-0.5">{app.job_title}</p>
                           <div className="flex justify-between items-center mt-2">
-                            <span className="text-[10px] font-bold text-[#B45309] bg-[#FFFBEB] border border-[#FEF3C7] rounded px-1.5 py-0.5 uppercase tracking-wide">
+                            <span className="text-[9px] font-bold text-[#B45309] bg-white/80 border border-[#FEF3C7] rounded px-1.5 py-0.5 uppercase tracking-wide">
                               Upcoming
                             </span>
                             <span className="text-[10px] text-[#B45309] font-semibold">{formatDate(app.follow_up_date)}</span>
@@ -261,8 +285,8 @@ export default async function DashboardPage() {
 
           {/* Quick stats / Progress bars Card */}
           {apps.length > 0 && (
-            <div className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-5 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#111827] mb-4">Response Distribution</h3>
+            <div className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] rounded-[20px] p-5">
+              <h3 className="text-sm font-bold text-[#111827] mb-4">Response Distribution</h3>
               <div className="space-y-3.5">
                 {(['applied', 'interview', 'offer', 'rejected', 'wishlist'] as const).map(status => {
                   const count = apps.filter(a => a.status === status).length
@@ -279,10 +303,10 @@ export default async function DashboardPage() {
                           className="h-full rounded-full transition-all duration-700"
                           style={{ 
                             width: `${pct}%`, 
-                            backgroundColor: cfg.dot === 'bg-[#1D4ED8]' ? '#1D4ED8' : 
-                                       cfg.dot === 'bg-[#B45309]' ? '#B45309' : 
-                                       cfg.dot === 'bg-[#15803D]' ? '#15803D' : 
-                                       cfg.dot === 'bg-[#B91C1C]' ? '#B91C1C' : '#374151'
+                            backgroundColor: cfg.dot === 'bg-[#1D4ED8]' ? '#3B82F6' : 
+                                       cfg.dot === 'bg-[#B45309]' ? '#F59E0B' : 
+                                       cfg.dot === 'bg-[#15803D]' ? '#10B981' : 
+                                       cfg.dot === 'bg-[#B91C1C]' ? '#EF4444' : '#6B7280'
                           }}
                         />
                       </div>

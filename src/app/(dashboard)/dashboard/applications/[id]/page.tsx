@@ -28,7 +28,7 @@ export default async function EditApplicationPage({ params }: { params: { id: st
         </Link>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">{app.job_title}</h1>
+            <h1 className="text-2xl font-bold text-[#111827]">{app.job_title}</h1>
             <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
               {app.company_name} · Applied {formatDate(app.applied_date)}
             </p>

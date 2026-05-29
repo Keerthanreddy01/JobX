@@ -199,15 +199,15 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
         )}
 
         {/* Core fields card */}
-        <div className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] p-6 space-y-6 rounded-[12px] shadow-sm">
-          <h2 className="font-semibold text-[#111827] flex items-center gap-2 text-base border-b border-[#E5E7EB] pb-3">
+        <div className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] p-6 space-y-6 rounded-[20px]">
+          <h2 className="font-bold text-[#111827] flex items-center gap-2 text-base border-b border-[#F3F4F6] pb-3">
             <Briefcase className="w-4.5 h-4.5 text-[#6B7280]" />
             Job Details
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-[13px] font-semibold text-[#6B7280] mb-1.5" htmlFor="job-title">
+              <label className="block text-[13px] font-bold text-[#6B7280] mb-1.5" htmlFor="job-title">
                 Job Title <span className="text-red-500">*</span>
               </label>
               <div className="relative">
@@ -217,7 +217,7 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                   type="text"
                   value={form.job_title}
                   onChange={set('job_title')}
-                  className="input-field pl-10 border-[#E5E7EB]"
+                  className="input-field pl-10"
                   placeholder="e.g. Senior Frontend Engineer"
                   required
                 />
@@ -225,7 +225,7 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             </div>
 
             <div>
-              <label className="block text-[13px] font-semibold text-[#6B7280] mb-1.5" htmlFor="company-name">
+              <label className="block text-[13px] font-bold text-[#6B7280] mb-1.5" htmlFor="company-name">
                 Company Name <span className="text-red-500">*</span>
               </label>
               <div className="relative">
@@ -235,7 +235,7 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                   type="text"
                   value={form.company_name}
                   onChange={set('company_name')}
-                  className="input-field pl-10 border-[#E5E7EB]"
+                  className="input-field pl-10"
                   placeholder="e.g. Google"
                   required
                 />
@@ -243,12 +243,12 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             </div>
 
             <div>
-              <label className="block text-[13px] font-semibold text-[#6B7280] mb-1.5" htmlFor="status">Status</label>
+              <label className="block text-[13px] font-bold text-[#6B7280] mb-1.5" htmlFor="status">Status</label>
               <select
                 id="status"
                 value={form.status}
                 onChange={set('status')}
-                className="input-field border-[#E5E7EB] cursor-pointer bg-[#FFFFFF]"
+                className="input-field cursor-pointer"
               >
                 {STATUS_OPTIONS.map(o => (
                   <option key={o.value} value={o.value} className="bg-[#FFFFFF] text-[#111827]">{o.label}</option>
@@ -257,7 +257,7 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             </div>
 
             <div>
-              <label className="block text-[13px] font-semibold text-[#6B7280] mb-1.5" htmlFor="job-url">Job URL (optional)</label>
+              <label className="block text-[13px] font-bold text-[#6B7280] mb-1.5" htmlFor="job-url">Job URL (optional)</label>
               <div className="relative">
                 <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                 <input
@@ -265,14 +265,14 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                   type="url"
                   value={form.job_url}
                   onChange={set('job_url')}
-                  className="input-field pl-10 border-[#E5E7EB]"
+                  className="input-field pl-10"
                   placeholder="https://..."
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[13px] font-semibold text-[#6B7280] mb-1.5" htmlFor="applied-date">Application Date</label>
+              <label className="block text-[13px] font-bold text-[#6B7280] mb-1.5" htmlFor="applied-date">Application Date</label>
               <div className="relative">
                 <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                 <input
@@ -280,13 +280,13 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                   type="date"
                   value={form.applied_date}
                   onChange={set('applied_date')}
-                  className="input-field pl-10 border-[#E5E7EB] cursor-pointer"
+                  className="input-field pl-10 cursor-pointer"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[13px] font-semibold text-[#6B7280] mb-1.5" htmlFor="follow-up-date">Follow-up Date (optional)</label>
+              <label className="block text-[13px] font-bold text-[#6B7280] mb-1.5" htmlFor="follow-up-date">Follow-up Date (optional)</label>
               <div className="relative">
                 <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                 <input
@@ -294,7 +294,7 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                   type="date"
                   value={form.follow_up_date}
                   onChange={set('follow_up_date')}
-                  className="input-field pl-10 border-[#E5E7EB] cursor-pointer"
+                  className="input-field pl-10 cursor-pointer"
                 />
               </div>
             </div>
@@ -302,15 +302,15 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
         </div>
 
         {/* Job Description + AI card */}
-        <div className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] p-6 space-y-4 rounded-[12px] shadow-sm">
-          <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#E5E7EB] pb-3">
+        <div className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] p-6 space-y-4 rounded-[20px]">
+          <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[#F3F4F6] pb-3">
             <div>
-              <h2 className="font-semibold text-[#111827] flex items-center gap-2 text-base">
+              <h2 className="font-bold text-[#111827] flex items-center gap-2 text-base">
                 <FileText className="w-4.5 h-4.5 text-[#6B7280]" />
                 Job Description
               </h2>
               {/* NVIDIA light badge */}
-              <div className="flex items-center gap-1.5 mt-1 bg-[#EFF6FF] border border-[#DBEAFE] text-[#1D4ED8] rounded px-2 py-0.5 w-max">
+              <div className="flex items-center gap-1.5 mt-1 bg-[#EFF6FF] border border-[#DBEAFE] text-[#1D4ED8] rounded px-2 py-0.5 w-max shadow-sm">
                 <Cpu className="w-3.5 h-3.5 text-[#1D4ED8]" />
                 <span className="text-[10px] font-bold text-[#1D4ED8] uppercase tracking-wide">NVIDIA NIM · DeepSeek R1</span>
               </div>
@@ -321,12 +321,12 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                 id="parse-jd-btn"
                 onClick={handleParseJD}
                 disabled={!!aiLoading}
-                className="btn-secondary text-xs py-2 px-3.5 font-semibold border-[#E5E7EB] bg-[#FFFFFF] hover:bg-[#F9FAFB] text-[#6B7280]"
+                className="border border-[#7C3AED]/30 hover:border-[#7C3AED] bg-[#FFFFFF] hover:bg-[#FDFEFF] text-[#7C3AED] text-xs font-semibold px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
               >
                 {aiLoading === 'parse' ? (
                   <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Parsing...</>
                 ) : (
-                  <><FileSearch className="w-3.5 h-3.5 text-[#6B7280]" /> Parse JD</>
+                  <><FileSearch className="w-3.5 h-3.5 text-[#7C3AED]" /> Parse JD</>
                 )}
               </button>
               <button
@@ -334,7 +334,7 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
                 id="cover-letter-btn"
                 onClick={handleGenerateCoverLetter}
                 disabled={!!aiLoading}
-                className="btn-primary text-xs py-2 px-3.5 font-semibold text-white"
+                className="bg-gradient-to-r from-[#7C3AED] to-[#6D28D9] hover:from-[#6D28D9] hover:to-[#5B21B6] text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-sm hover:shadow-md transition-all flex items-center gap-1.5 border border-transparent active:scale-95"
               >
                 {aiLoading === 'cover' ? (
                   <><Loader2 className="w-3.5 h-3.5 animate-spin text-white" /> Generating...</>
@@ -348,18 +348,18 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             id="job-description"
             value={form.job_description}
             onChange={set('job_description')}
-            className="input-field resize-none border-[#E5E7EB]"
+            className="input-field resize-none"
             placeholder="Paste the full job description here… NVIDIA DeepSeek R1 will automatically extract experience level, salary, skills, and responsibilities."
             rows={8}
           />
           <p className="text-xs text-[#9CA3AF] leading-relaxed">
-            Paste the JD → Click <strong className="text-[#6B7280]">Parse JD</strong> to summarize keys, or <strong className="text-[#6B7280]">Cover Letter</strong> to craft paragraphs tailored for the role.
+            Paste the JD → Click <strong className="text-[#7C3AED] font-semibold">Parse JD</strong> to summarize keys, or <strong className="text-[#7C3AED] font-semibold">Cover Letter</strong> to craft paragraphs tailored for the role.
           </p>
         </div>
 
         {/* Notes card */}
-        <div className="glass-card bg-[#FFFFFF] border border-[#E5E7EB] p-6 space-y-4 rounded-[12px] shadow-sm">
-          <h2 className="font-semibold text-[#111827] flex items-center gap-2 text-base border-b border-[#E5E7EB] pb-3">
+        <div className="bg-[#FFFFFF] shadow-[0_4px_20px_rgba(0,0,0,0.02)] p-6 space-y-4 rounded-[20px]">
+          <h2 className="font-bold text-[#111827] flex items-center gap-2 text-base border-b border-[#F3F4F6] pb-3">
             <StickyNote className="w-4.5 h-4.5 text-[#6B7280]" />
             Notes
           </h2>
@@ -367,7 +367,7 @@ export default function ApplicationForm({ existing }: ApplicationFormProps) {
             id="notes"
             value={form.notes}
             onChange={set('notes')}
-            className="input-field resize-none border-[#E5E7EB]"
+            className="input-field resize-none"
             placeholder="Referral contacts, networking prep notes, compensation expectations, or next step drafts…"
             rows={4}
           />
